@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vgp/main.dart';
 import 'package:vgp/models/app_setting.dart';
+import 'package:vgp/resources/constants/constants.dart';
 import 'package:vgp/resources/utils/app/app_theme.dart';
+import 'package:vgp/resources/utils/data_sources/local.dart';
 import 'package:vgp/resources/widgets/base_screen/base_consumer_state.dart';
 import 'package:vgp/resources/widgets/custom_appbar.dart';
 import 'package:vgp/routes/route_const.dart';
 import 'package:vgp/viewmodels/app_setting_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vgp/viewmodels/geolocation_view_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({key}) : super(key: key);
@@ -19,6 +22,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomePageState extends BaseConsumerState<HomeScreen> {
   late AsyncValue<AppSetting> _appSetting;
+  late GeolocationViewModel _geolocationViewModel;
+
+  @override
+  void initState() {
+    _geolocationViewModel = GeolocationViewModel();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,48 +82,33 @@ class _HomePageState extends BaseConsumerState<HomeScreen> {
     });
   }
 
+  void _changeLanguage() async{
+    const language = 'en';
+    (await SharedPre.instance).setString(SharedPrefsConstants.LANGUAGE_KEY, language);
+    MyApp.of(context)?.setLocale(Locale(language));
+  }
+
   void _scanCode() {
     try {
       context.pushNamed(RouteConstants.scannerRouteName).then((value) async {
         showLoading(context, show: true, color: Colors.grey);
         // await Future.delayed(const Duration(seconds: 1));
-        Position a = await _determinePosition();
+        final location = await _geolocationViewModel.determinePosition();
         if (value != null && (value as String).isNotEmpty) {
           final List qrLocation = value.split(',');
-          final distance = Geolocator.distanceBetween(a.latitude, a.longitude,
-              double.parse(qrLocation[0]), double.parse(qrLocation[1]));
+          final distance = _geolocationViewModel.distanceBetween(
+              location.latitude,
+              location.longitude,
+              double.parse(qrLocation[0]),
+              double.parse(qrLocation[1]));
           showLoading(context, show: false);
-          showSuccessToast('${AppLocalizations.of(context)!.scanDistanceSuccessToast} ${distance.floor()}m');
+          showSuccessToast(
+              '${AppLocalizations.of(context)!.scanDistanceSuccessToast} ${distance.floor()}m');
         }
         // latitude and longitude
       });
     } catch (e) {
       print(e);
     }
-  }
-
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition(timeLimit: const Duration(seconds: 10));
   }
 }
