@@ -1,0 +1,95 @@
+{
+  "parts": [
+    {
+      "id": 1,
+      "name": "Part 1",
+      "code": "MX",
+      "serialNumber": "876869776671",
+      "status": 1
+    },
+    {
+      "id": 2,
+      "name": "Part 2",
+      "code": "MY",
+      "serialNumber": "876869776672",
+      "status": 1
+    },
+    {
+      "id": 3,
+      "name": "Part 3",
+      "code": "MZ",
+      "serialNumber": "876869776673",
+      "status": 2
+    },
+    {
+      "id": 4,
+      "name": "Part 4",
+      "code": "PX",
+      "serialNumber": "876869776674",
+      "status": 2
+    },
+    {
+      "id": 5,
+      "name": "Part 5",
+      "code": "PY",
+      "serialNumber": "876869776675",
+      "status": 1
+    },
+    {
+      "id": 6,
+      "name": "Part 6",
+      "code": "PZ",
+      "serialNumber": "876869776676",
+      "status": 1
+    },
+    {
+      "id": 7,
+      "name": "Part 7",
+      "code": "MX",
+      "serialNumber": "876869776677",
+      "status": 3
+    },
+    {
+      "id": 8,
+      "name": "Part 8",
+      "code": "MX",
+      "serialNumber": "876869776678",
+      "status": 3
+    },
+    {
+      "id": 9,
+      "name": "Part 9",
+      "code": "PX",
+      "serialNumber": "876869776679",
+      "status": 1
+    },
+    {
+      "id": 10,
+      "name": "Part 10",
+      "code": "PX",
+      "serialNumber": "876869776610",
+      "status": 1
+    },
+    {
+      "id": 11,
+      "name": "Part 11",
+      "code": "MY",
+      "serialNumber": "876869776611",
+      "status": 2
+    },
+    {
+      "id": 12,
+      "name": "Part 12",
+      "code": "MY",
+      "serialNumber": "876869776612",
+      "status": 3
+    },
+    {
+      "id": 13,
+      "name": "Part 13",
+      "code": "PY",
+      "serialNumber": "876869776613",
+      "status": 1
+    }
+  ]
+}

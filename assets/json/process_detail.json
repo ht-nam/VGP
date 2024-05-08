@@ -1,0 +1,124 @@
+{
+  "processDetails": [
+    {
+      "id": 1,
+      "name": "Work 1",
+      "value": 12,
+      "unit": "-",
+      "inputType": 1,
+      "modifyDate":"2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Work 2",
+      "value": "NG",
+      "unit": "-",
+      "inputType": 2,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Work 3",
+      "value": "OK",
+      "unit": "-",
+      "inputType": 2,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Work 4",
+      "value": "AAAAAAAA",
+      "unit": "-",
+      "inputType": 3,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Work 5",
+      "value": 12222222,
+      "unit": "-",
+      "inputType": 3,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Work 6",
+      "value": 90,
+      "unit": "Nm",
+      "inputType": 4,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Work 7",
+      "value": "AUBKXA",
+      "unit": "-",
+      "inputType": 1,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Work 8",
+      "value": 4324324,
+      "unit": "-",
+      "inputType": 1,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Work 9",
+      "value": null,
+      "unit": "-",
+      "inputType": 1,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Work 10",
+      "value": null,
+      "unit": "-",
+      "inputType": 1,
+      "modifyDate": "2024-03-01",
+      "worker": {
+        "id": 1,
+        "name": "Worker 1"
+      }
+    }
+  ]
+}

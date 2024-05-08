@@ -1,0 +1,11 @@
+{
+  "user": {
+    "name": "組立太郎",
+    "birthday": "1980-09-21",
+    "gender": "男性",
+    "address": "Tokyo, Sibuya",
+    "phone_number": "0123456789",
+    "email": "test@gmail.com",
+    "password": "123456"
+  }
+}

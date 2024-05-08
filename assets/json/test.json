@@ -1,0 +1,22 @@
+{
+  "jokes": [
+    {
+      "id": "1",
+      "type": "Type 1",
+      "setup": "Setup 1",
+      "punchline": "Punchline 1"
+    },
+    {
+      "id": "2",
+      "type": "Type 2",
+      "setup": "Setup 2",
+      "punchline": "Punchline 2"
+    },
+    {
+      "id": "3",
+      "type": "Type 3",
+      "setup": "Setup 3",
+      "punchline": "Punchline 3"
+    }
+  ]
+}

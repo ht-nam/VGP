@@ -1,0 +1,30 @@
+{
+  "language": "English",
+  "@language": {
+    "description": "Current language of the application"
+  },
+  "login": "login",
+  "email": "ID",
+  "emailAddress": "Email address",
+  "password": "Password",
+  "rememberPassword": "Remember password",
+  "forgotPassword": "Forgot password",
+  "forgotPasswordDetail": "Forgot your password? No need to worry. If you let us know your registered email address, we will send you a password",
+  "havePassword": "Already have password, login now",
+  "send": "Send",
+  "usernameValidation" : "Id cannot be empty",
+  "passwordValidation" : "Password should be at least 8 characters",
+  "loginSuccessful": "Login successful",
+  "loginFailed": "Login failed",
+  "unexpectedError": "Unexpected error occurred",
+  "success": "Success",
+  "error": "Error",
+
+  "homeScreen": "Home Screen",
+  "scan": "Scan",
+  "scanDistanceSuccessToast": "Distance from your location:",
+
+  "qrDetail": "Please scan the QR code.",
+  "changePasswordSuccessful": "Your password has been changed",
+  "changePasswordFailed": "Password change failed"
+}

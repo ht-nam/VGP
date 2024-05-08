@@ -1,0 +1,27 @@
+{
+  "language": "日本語",
+  "login": "ログイン",
+  "email": "ID",
+  "emailAddress": "メールアドレス",
+  "password": "パスワード",
+  "rememberPassword": "ログイン状態を保持",
+  "forgotPassword": "パスワードを忘れた",
+  "forgotPasswordDetail": "パスワードを忘れましたか？心配する必要はありません。 ご登録いただいたメールアドレスを教えていただければ、パスワードを送信させていただきます。",
+  "havePassword": "パスワードをお持ちですか？サインイン",
+  "send": "送信",
+  "usernameValidation" : "ID を空にすることはできません",
+  "passwordValidation" : "パスワードは8文字以上である必要があります",
+  "loginSuccessful": "ログイン成功",
+  "loginFailed": "ログインに失敗しました",
+  "unexpectedError": "予期しないエラーが発生しました",
+  "success": "成功",
+  "error": "エラー",
+
+  "homeScreen": "ホーム画面",
+  "scan": "スキャン",
+  "scanDistanceSuccessToast": "現在地からの距離:",
+
+  "qrDetail": "QRコードをスキャンしてください。",
+  "changePasswordSuccessful": "あなたのパスワードは変更されました",
+  "changePasswordFailed": "パスワード変更に失敗しました"
+}
