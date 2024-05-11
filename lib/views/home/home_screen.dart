@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vgp/main.dart';
 import 'package:vgp/models/app_setting.dart';
+import 'package:vgp/models/exceptions/base_exception.dart';
 import 'package:vgp/resources/constants/constants.dart';
 import 'package:vgp/resources/utils/app/app_theme.dart';
 import 'package:vgp/resources/utils/data_sources/local.dart';
@@ -82,17 +83,23 @@ class _HomePageState extends BaseConsumerState<HomeScreen> {
     });
   }
 
-  void _changeLanguage() async{
+  void _changeLanguage() async {
     const language = 'en';
-    (await SharedPre.instance).setString(SharedPrefsConstants.LANGUAGE_KEY, language);
+    (await SharedPre.instance)
+        .setString(SharedPrefsConstants.LANGUAGE_KEY, language);
     MyApp.of(context)?.setLocale(Locale(language));
   }
 
-  void _scanCode() {
-    try {
-      context.pushNamed(RouteConstants.scannerRouteName).then((value) async {
-        showLoading(context, show: true, color: Colors.grey);
-        // await Future.delayed(const Duration(seconds: 1));
+  void _scanCode() async {
+    if (!(await _geolocationViewModel.isEnableGps())) {
+      _showGpsAlertDialog();
+      return;
+    }
+
+    context.pushNamed(RouteConstants.scannerRouteName).then((value) async {
+      showLoading(context, show: true, color: Colors.grey);
+      // await Future.delayed(const Duration(seconds: 1));
+      try {
         final location = await _geolocationViewModel.determinePosition();
         if (value != null && (value as String).isNotEmpty) {
           final List qrLocation = value.split(',');
@@ -101,14 +108,41 @@ class _HomePageState extends BaseConsumerState<HomeScreen> {
               location.longitude,
               double.parse(qrLocation[0]),
               double.parse(qrLocation[1]));
-          showLoading(context, show: false);
           showSuccessToast(
               '${AppLocalizations.of(context)!.scanDistanceSuccessToast} ${distance.floor()}m');
+        } else {
+          showSuccessToast('Your location: ${location.latitude}, ${location.longitude}');
         }
-        // latitude and longitude
-      });
-    } catch (e) {
-      print(e);
-    }
+      } on BaseException catch (e) {
+        showErrorToast(e.message ?? '');
+      }
+      showLoading(context, show: false);
+      // latitude and longitude
+    });
+  }
+
+  void _showGpsAlertDialog() {
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () => context.pop(),
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Go to settings"),
+      onPressed: () async {
+        await _geolocationViewModel.openLocationSettings();
+        context.pop();
+      },
+    );
+
+    AlertDialog dialogModal = AlertDialog(
+      content: Text("GPS is disabled in your device. Enable it?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+    );
+    showCenterPopUpDialog(context, ref, dialogModal);
   }
 }

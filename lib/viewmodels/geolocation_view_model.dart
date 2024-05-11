@@ -1,31 +1,47 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:vgp/models/exceptions/base_exception.dart';
 import 'package:vgp/resources/utils/helpers/helper_mixin.dart';
 
 class GeolocationViewModel with HelperMixin {
-  Future<Position> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  Future<bool> isEnableGps() async {
+    return Geolocator.isLocationServiceEnabled();
+  }
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
+  Future<void> openLocationSettings() async {
+    await Geolocator.openLocationSettings();
+  }
+
+  Future<Position> determinePosition() async {
+    LocationPermission permission;
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        throw BaseException(message: 'Location permissions are denied.');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      throw BaseException(
+          message:
+              'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    return await Geolocator.getCurrentPosition(
-        timeLimit: const Duration(seconds: 10));
+    try {
+      return await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best,
+          timeLimit: const Duration(seconds: 10)
+          );
+    } catch (e) {
+      print(e);
+      try {
+        return (await Geolocator.getLastKnownPosition())!;
+      } catch (e) {
+        print(e);
+      }
+      throw BaseException(message: "Unexpected error.");
+    }
   }
 
   double distanceBetween(double startLatitude, double startLongitude,
